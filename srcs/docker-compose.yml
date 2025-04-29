@@ -1,0 +1,50 @@
+services:
+
+  mariadb:
+    build: ./requirements/mariadb/
+    restart: always
+    environment:
+        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        MYSQL_DATABASE: ${MYSQL_DATABASE} 
+        MYSQL_USER: ${MYSQL_USER}
+        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+        - bridge_net
+
+  wordpress:
+    build: ./requirements/wordpress/
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: mariadb
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD} 
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+    volumes:
+        - wp_data:/var/www/html
+    depends_on:
+        - mariadb
+    networks:
+        - bridge_net
+
+  nginx:
+    build: ./requirements/nginx/
+    restart: always
+    ports:
+        - "8080:80"
+    volumes:
+        - wp_data:/var/www/html:ro
+    depends_on:
+        - wordpress
+    networks:
+        - bridge_net
+
+
+volumes:
+  db_data:
+  wp_data:
+
+networks:
+  bridge_net:
+    driver: bridge
