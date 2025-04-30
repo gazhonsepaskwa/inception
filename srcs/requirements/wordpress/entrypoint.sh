@@ -6,6 +6,8 @@ until wp db check --allow-root; do
   sleep 2
 done
 
+chown -R www-data:www-data /var/www/html
+
 if ! wp core is-installed --allow-root; then
   wp core install \
     --url="http://localhost" \
