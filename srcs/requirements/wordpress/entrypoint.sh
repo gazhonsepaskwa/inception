@@ -1,8 +1,10 @@
 #!/bin/bash
 set -e
+set -x
 
-echo "Waiting for MySQL to be ready..."
-until wp db check --allow-root; do
+# Wait for MariaDB to be ready
+until mysqladmin ping -h"$WORDPRESS_DB_HOST" -u"$WORDPRESS_DB_USER" -p"$WORDPRESS_DB_PASSWORD" --silent; do
+  echo "Waiting for MariaDB..."
   sleep 2
 done
 
@@ -19,7 +21,6 @@ if ! wp core is-installed --allow-root; then
     --allow-root
 fi
 
-# --- basic homepage if it doesn't exist ---
 HOMEPAGE_ID=$(wp post list --post_type=page --pagename=home --field=ID --allow-root)
 
 if [ -z "$HOMEPAGE_ID" ]; then
@@ -32,7 +33,6 @@ if [ -z "$HOMEPAGE_ID" ]; then
     --allow-root)
 fi
 
-# Set the static homepage
 wp option update show_on_front 'page' --allow-root
 wp option update page_on_front $HOMEPAGE_ID --allow-root
 
