@@ -26,25 +26,19 @@ if [ ! -d "$DATADIR/mysql" ]; then
         exit 1
     fi
 
-	mysql_root_exec <<-EOSQL
-        ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
-        FLUSH PRIVILEGES;
-	EOSQL
+    # Set root password
+    echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}'; FLUSH PRIVILEGES;" | mysql_root_exec
 
+    # Create database if requested
     if [ -n "$MYSQL_DATABASE" ]; then
         echo "Creating database: $MYSQL_DATABASE"
-		mysql_root_exec -p"${MYSQL_ROOT_PASSWORD}" <<-EOSQL
-            CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-		EOSQL
+        echo "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" | mysql_root_exec -p"${MYSQL_ROOT_PASSWORD}"
     fi
 
+    # Create user and grant privileges if requested
     if [ -n "$MYSQL_USER" ] && [ -n "$MYSQL_PASSWORD" ]; then
         echo "Creating user: $MYSQL_USER with access to database: $MYSQL_DATABASE"
-		mysql_root_exec -p"${MYSQL_ROOT_PASSWORD}" <<-EOSQL
-			CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
-			GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE:-*}\`.* TO '${MYSQL_USER}'@'%';
-			FLUSH PRIVILEGES;
-		EOSQL
+        echo "CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}'; GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE:-*}\`.* TO '${MYSQL_USER}'@'%'; FLUSH PRIVILEGES;" | mysql_root_exec -p"${MYSQL_ROOT_PASSWORD}"
     fi
 
     echo "Running init scripts..."
@@ -63,3 +57,4 @@ fi
 
 echo "Starting MariaDB server..."
 exec mysqld
+
