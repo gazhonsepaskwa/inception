@@ -24,27 +24,27 @@ if [ ! -d "$DATADIR/mysql" ]; then
     if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
         echo >&2 'Error: MYSQL_ROOT_PASSWORD is not set'
         exit 1
-    i
+    fi
 
-    mysql_root_exec <<-EOSQL
+	mysql_root_exec <<-EOSQL
         ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
         FLUSH PRIVILEGES;
-    EOSQL
+	EOSQL
 
     if [ -n "$MYSQL_DATABASE" ]; then
         echo "Creating database: $MYSQL_DATABASE"
-        mysql_root_exec -p"${MYSQL_ROOT_PASSWORD}" <<-EOSQL
+		mysql_root_exec -p"${MYSQL_ROOT_PASSWORD}" <<-EOSQL
             CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-        EOSQL
+		EOSQL
     fi
 
     if [ -n "$MYSQL_USER" ] && [ -n "$MYSQL_PASSWORD" ]; then
         echo "Creating user: $MYSQL_USER with access to database: $MYSQL_DATABASE"
-        mysql_root_exec -p"${MYSQL_ROOT_PASSWORD}" <<-EOSQL
-            CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
-            GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE:-*}\`.* TO '${MYSQL_USER}'@'%';
-            FLUSH PRIVILEGES;
-        EOSQL
+		mysql_root_exec -p"${MYSQL_ROOT_PASSWORD}" <<-EOSQL
+			CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
+			GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE:-*}\`.* TO '${MYSQL_USER}'@'%';
+			FLUSH PRIVILEGES;
+		EOSQL
     fi
 
     echo "Running init scripts..."
