@@ -10,8 +10,6 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 EXPOSE 3306
 
-# Use the custom entrypoint script
 ENTRYPOINT ["docker-entrypoint.sh"]
 
-# Start MariaDB daemon in foreground
 CMD ["mysqld"]
