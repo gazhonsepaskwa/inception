@@ -1,3 +1,17 @@
-FROM mariadb:latest
+FROM debian:latest
 
-COPY ./init.sql /docker-entrypoint-initdb.d/init.sql
+RUN apt-get update && apt-get install -y mariadb-server && rm -rf /var/lib/apt/lists/*
+
+RUN sed -i 's/^bind-address\s*=.*$/bind-address = 0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
+
+COPY init.sql /docker-entrypoint-initdb.d/init.sql
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+EXPOSE 3306
+
+# Use the custom entrypoint script
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+# Start MariaDB daemon in foreground
+CMD ["mysqld"]
