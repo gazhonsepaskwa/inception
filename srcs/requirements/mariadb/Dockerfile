@@ -1,12 +1,15 @@
-FROM debian:latest
+FROM debian:bullseye
 
-RUN apt-get update && apt-get install -y mariadb-server && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y mariadb-server && apt-get install -y gosu && rm -rf /var/lib/apt/lists/*
 
 RUN sed -i 's/^bind-address\s*=.*$/bind-address = 0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
 
 # COPY init.sql /docker-entrypoint-initdb.d/init.sql
 COPY docker-entrypoint.sh /usr/local/bin/
+COPY init.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/init.sh
+RUN usr/local/bin/init.sh
 
 EXPOSE 3306
 
