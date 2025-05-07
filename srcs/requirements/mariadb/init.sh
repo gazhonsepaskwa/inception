@@ -1,7 +1,12 @@
+#!/bin/bash
+
+function mysql_root_exec {
+    mysql -uroot "$@"
+}
+
 echo "Initializing database..."
 
-mysqld --version
-mysqld --initialize --user=mysql
+mariadb-install-db --user=mysql
 
 echo "Starting temporary MariaDB server..."
 mysqld_safe --skip-networking &
@@ -12,6 +17,7 @@ until mysqladmin ping --silent; do
 done
 
 echo "Configuring root user and database..."
+echo "$MYSQL_ROOT_PASSWORD"
 if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
 	echo >&2 'Error: MYSQL_ROOT_PASSWORD is not set'
 	exit 1
