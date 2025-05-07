@@ -1,5 +1,10 @@
 FROM debian:bullseye
 
+ARG MYSQL_ROOT_PASSWORD
+ARG MYSQL_DATABASE
+ARG MYSQL_USER
+ARG MYSQL_PASSWORD
+
 RUN apt-get update && apt-get install -y mariadb-server && apt-get install -y gosu && rm -rf /var/lib/apt/lists/*
 
 RUN sed -i 's/^bind-address\s*=.*$/bind-address = 0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
