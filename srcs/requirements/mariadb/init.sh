@@ -6,9 +6,9 @@ function mysql_root_exec {
 
 echo "Initializing database..."
 
-if [ ! -d /var/lib/mysql/mysql ]; then
-    mariadb-install-db --user=mysql --datadir=/var/lib/mysql
-fi
+mariadb-install-db --user=mysql --datadir=/var/lib/mysql  #|| { echo "Error: fatal"; exit 1; }
+echo $?
+exit 1
 
 echo "Starting temporary MariaDB server..."
 mysqld_safe --skip-networking &
@@ -31,6 +31,9 @@ echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}'; FLUS
 if [ -n "$MYSQL_DATABASE" ]; then
     echo "Creating database: $MYSQL_DATABASE"
     echo "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" | mysql_root_exec -p"${MYSQL_ROOT_PASSWORD}"
+else
+    echo >&2 'Error: MYSQL_DATABASE is not set'
+    exit 1
 fi
 
 if [ -n "$MYSQL_USER" ] && [ -n "$MYSQL_PASSWORD" ]; then
