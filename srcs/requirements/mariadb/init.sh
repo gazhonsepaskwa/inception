@@ -7,8 +7,6 @@ function mysql_root_exec {
 echo "Initializing database..."
 
 mariadb-install-db --user=mysql --datadir=/var/lib/mysql  #|| { echo "Error: fatal"; exit 1; }
-echo $?
-exit 1
 
 echo "Starting temporary MariaDB server..."
 mysqld_safe --skip-networking &
