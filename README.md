@@ -17,10 +17,5 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 
-# compose plugin
-sudo apt-get update
-sudo apt-get install docker-compose-plugin
-
 # add user to the docker group
 sudo usermod -aG docker $USER
-

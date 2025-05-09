@@ -10,4 +10,9 @@ clean: down
 	@echo "Removing all Docker volumes..."
 	@docker volume prune -f
 
+nuke: clean
+	@docker system prune
+	sudo rm -rf ~/data/db/* 
+	sudo rm -rf ~/data/wp/* 
+
 .PHONY: up down clean

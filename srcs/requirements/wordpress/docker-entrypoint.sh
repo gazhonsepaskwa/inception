@@ -5,5 +5,5 @@ envsubst < /var/www/wordpress/wp-config.php.template > /var/www/wordpress/wp-con
 
 chown www-data:www-data /var/www/wordpress/wp-config.php
 
-# Start PHP-FPM
-exec php-fpm7.4 -F
+echo "Starting php srv"
+exec php-fpm7.4 -v
