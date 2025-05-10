@@ -1,18 +1,13 @@
 #!/bin/bash
 set -e
 
-# Wait for MariaDB to be accessible
-echo "Waiting for MariaDB to be accessible..."
+echo -n "Waiting for MariaDB to be accessible"
 until nc -z "${WORDPRESS_DB_HOST}" 3306; do
-    echo "MariaDB is unavailable - sleeping"
+    echo -n "."
     sleep 2
 done
-echo "MariaDB is up - continuing"
+echo "\nMariaDB is up - continuing"
 
-# Correct the redirection operator
-ls -la /var/www/html >/dev/null 2>&1
-
-# Exit if the template file is missing
 if [ ! -f /var/www/html/wp-config.php.template ]; then
     echo "Error: wp-config.php.template not found in /var/www/html"
     exit 1
