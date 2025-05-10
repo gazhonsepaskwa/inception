@@ -11,6 +11,9 @@ RUN wget https://wordpress.org/latest.tar.gz -O /tmp/wordpress.tar.gz \
 
 RUN chown -R www-data:www-data /var/www/html
 
+# Verify PHP-FPM configuration
+RUN php-fpm7.4 -t || { echo "PHP-FPM configuration is invalid"; exit 1; }
+
 COPY ./wp-config.php.template /var/www/html/
 
 COPY docker-entrypoint.sh /usr/local/bin/

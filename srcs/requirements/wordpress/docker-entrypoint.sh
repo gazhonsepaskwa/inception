@@ -24,5 +24,5 @@ sed -i 's|^listen = .*|listen = 9000|' /etc/php/7.4/fpm/pool.d/www.conf
 
 mkdir -p /run/php/
 
-echo "Starting php srv"
-exec php-fpm7.4 -F -v
+echo "Starting PHP-FPM..."
+exec php-fpm7.4 -F -v || { echo "PHP-FPM failed to start"; exit 1; }
