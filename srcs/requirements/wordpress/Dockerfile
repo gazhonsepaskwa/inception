@@ -1,7 +1,7 @@
 FROM debian:bullseye
 
 RUN apt-get update && apt-get install -y \
-    php php-fpm php-mysql php-curl php-gd php-mbstring php-xml php-zip wget unzip gettext \
+    php php-fpm php-mysql php-curl php-gd php-mbstring php-xml php-zip wget unzip gettext nc\
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://wordpress.org/latest.tar.gz -O /tmp/wordpress.tar.gz \
