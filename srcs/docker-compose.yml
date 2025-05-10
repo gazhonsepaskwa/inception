@@ -9,11 +9,8 @@ services:
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     restart: always
-    environment:
-        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-        MYSQL_DATABASE: ${MYSQL_DATABASE} 
-        MYSQL_USER: ${MYSQL_USER}
-        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    env_file:
+      - .env
     volumes:
       - db_data:/var/lib/mysql
     networks:
@@ -27,11 +24,8 @@ services:
   wordpress:
     build: ./requirements/wordpress/
     restart: always
-    environment:
-      WORDPRESS_DB_HOST: mariadb
-      WORDPRESS_DB_USER: ${MYSQL_USER}
-      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD} 
-      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+    env_file:
+      - .env
     volumes:
         - wp_data:/var/www/html
     depends_on:

@@ -11,7 +11,7 @@ RUN wget https://wordpress.org/latest.tar.gz -O /tmp/wordpress.tar.gz \
 
 RUN chown -R www-data:www-data /var/www/html
 
-COPY wp-config.php.template /var/www/html/
+COPY ./wp-config.php.template /var/www/html/
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
