@@ -3,7 +3,7 @@ set -e
 
 # Wait for MariaDB to be accessible
 echo "Waiting for MariaDB to be accessible..."
-until mysqladmin ping -h"${WORDPRESS_DB_HOST}" -u"${WORDPRESS_DB_USER}" -p"${WORDPRESS_DB_PASSWORD}" --silent; do
+until nc -z "${WORDPRESS_DB_HOST}" 3306; do
     echo "MariaDB is unavailable - sleeping"
     sleep 2
 done
