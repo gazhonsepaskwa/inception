@@ -5,15 +5,15 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://wordpress.org/latest.tar.gz -O /tmp/wordpress.tar.gz \
-	&& mkdir /var/www/ \
-    && tar -xzf /tmp/wordpress.tar.gz -C /var/www/ \
+    && mkdir -p /var/www/html \
+    && tar -xzf /tmp/wordpress.tar.gz -C /var/www/html --strip-components=1 \
     && rm /tmp/wordpress.tar.gz
 
 RUN chown -R www-data:www-data /var/www/html
 
-COPY docker-entrypoint.sh /usr/local/bin/
-
 COPY wp-config.php.template /var/www/html/wp-config.php.template
+
+COPY docker-entrypoint.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 

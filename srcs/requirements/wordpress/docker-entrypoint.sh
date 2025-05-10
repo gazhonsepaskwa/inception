@@ -1,13 +1,30 @@
 #!/bin/bash
 set -e
 
+# Wait for MariaDB to be accessible
+echo "Waiting for MariaDB to be accessible..."
+until mysqladmin ping -h"${WORDPRESS_DB_HOST}" -u"${WORDPRESS_DB_USER}" -p"${WORDPRESS_DB_PASSWORD}" --silent; do
+    echo "MariaDB is unavailable - sleeping"
+    sleep 2
+done
+echo "MariaDB is up - continuing"
+
+# Correct the redirection operator
+ls -la /var/www/html >/dev/null 2>&1
+
+# Exit if the template file is missing
+if [ ! -f /var/www/html/wp-config.php.template ]; then
+    echo "Error: wp-config.php.template not found in /var/www/html"
+    exit 1
+fi
+
 envsubst < /var/www/html/wp-config.php.template > /var/www/html/wp-config.php
 
-chown www-data:www-data /var/www/html/wp-config.php
+chown -R www-data:www-data /var/www/html
 
 sed -i 's|^listen = .*|listen = 9000|' /etc/php/7.4/fpm/pool.d/www.conf
 
-mkdir /run/php/
+mkdir -p /run/php/
 
 echo "Starting php srv"
 exec php-fpm7.4 -F -v

@@ -18,6 +18,11 @@ services:
       - db_data:/var/lib/mysql
     networks:
         - bridge_net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "--silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   wordpress:
     build: ./requirements/wordpress/
@@ -30,7 +35,8 @@ services:
     volumes:
         - wp_data:/var/www/html
     depends_on:
-        - mariadb
+        mariadb:
+          condition: service_healthy
     networks:
         - bridge_net
 
