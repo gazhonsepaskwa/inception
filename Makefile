@@ -11,7 +11,7 @@ clean: down
 	@docker volume prune -f
 
 nuke: clean
-	@docker system prune
+	@docker system prune -a
 	sudo rm -rf ~/data/db/* 
 	sudo rm -rf ~/data/wp/* 
 
