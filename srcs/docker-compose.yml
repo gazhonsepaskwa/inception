@@ -55,13 +55,13 @@ volumes:
     driver_opts:
         type: none
         o: bind
-        device: /home/gazh/data/db/
+        device: /home/nalebrun/data/db/
   wp_data:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: /home/gazh/data/wp/
+        device: /home/nalebrun/data/wp/
 
 networks:
   bridge_net:
