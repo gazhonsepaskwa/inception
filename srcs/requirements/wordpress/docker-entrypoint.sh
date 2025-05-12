@@ -28,5 +28,8 @@ sed -i 's|^listen = .*|listen = 9000|' /etc/php/7.4/fpm/pool.d/www.conf
 
 mkdir -p /run/php/
 
+echo "installing..."
+wp core install --allow-root --path=/var/www/html --url=127.0.0.1 --title="1 sept i+" --admin_user="aa" --admin_password="aa" --admin_email="o@e.com"
+
 echo "Starting PHP-FPM..."
 exec php-fpm7.4 -F
