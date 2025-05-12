@@ -18,11 +18,9 @@ if (!defined('ABSPATH')) {
 require_once ABSPATH . 'wp-settings.php';
 EOF
 
-chown -R www-data:www-data /var/www/html
-
 sed -i 's|^listen = .*|listen = 9000|' /etc/php/7.4/fpm/pool.d/www.conf
 
 mkdir -p /run/php/
 
 echo "Starting PHP-FPM..."
-exec php-fpm7.4 -F -v || { echo "PHP-FPM failed to start"; exit 1; }
+exec php-fpm7.4 -F
