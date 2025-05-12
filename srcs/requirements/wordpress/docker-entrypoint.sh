@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+wget https://wordpress.org/latest.tar.gz -O /tmp/wordpress.tar.gz \
+    && mkdir -p /var/www/html \
+    && tar -xzf /tmp/wordpress.tar.gz -C /var/www/html --strip-components=1 \
+    && rm /tmp/wordpress.tar.gz
+
 # Generate wp-config.php using environment variables
 cat <<EOF > /var/www/html/wp-config.php
 <?php
