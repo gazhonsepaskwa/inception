@@ -1,5 +1,13 @@
 #!/bin/bash
-set -e
+set -ex
+
+
+
+
+### add a big if to install only at first time
+
+
+
 
 wget https://wordpress.org/latest.tar.gz -O /tmp/wordpress.tar.gz \
     && mkdir -p /var/www/html \
@@ -29,7 +37,10 @@ sed -i 's|^listen = .*|listen = 9000|' /etc/php/7.4/fpm/pool.d/www.conf
 mkdir -p /run/php/
 
 echo "installing..."
-wp core install --allow-root --path=/var/www/html --url=127.0.0.1 --title="1 sept i+" --admin_user="aa" --admin_password="aa" --admin_email="o@e.com"
+
+wp core install --allow-root --path=/var/www/html --url=nalebrun.42.fr --title="1 sept i+" --admin_user="${WP_ADMIN_NAME}" --admin_password="${WP_ADMIN_PASSWORD}" --admin_email="${WP_ADMIN_EMAIL}"
+
+wp user create "${WP_USER_NAME}" "${WP_USER_EMAIL}" --allow-root --path=/var/www/html --role="author" --user_pass="${WP_USER_PASSWORD}"
 
 echo "Starting PHP-FPM..."
 exec php-fpm7.4 -F
