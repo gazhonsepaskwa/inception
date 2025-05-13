@@ -48,6 +48,15 @@ services:
     networks:
         - bridge_net
 
+  redis:
+    image: ./requirements/redis/
+    restart: always
+    volumes:
+        - redis_data:/data
+
+
+# ======
+
 
 volumes:
   db_data:
@@ -56,12 +65,24 @@ volumes:
         type: none
         o: bind
         device: /home/nalebrun/data/db/
+
   wp_data:
     driver: local
     driver_opts:
         type: none
         o: bind
         device: /home/nalebrun/data/wp/
+
+  redis_data:
+    driver: local
+    driver_opts:
+        type: none
+        o: bind
+        device: /home/nalebrun/data/redis/
+
+
+# ======
+
 
 networks:
   bridge_net:

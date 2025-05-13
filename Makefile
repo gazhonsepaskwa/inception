@@ -16,4 +16,6 @@ nuke: clean
 	sudo rm -rf ~/data/db/* 
 	sudo rm -rf ~/data/wp/* 
 
+re: nuke up
+
 .PHONY: up down clean
