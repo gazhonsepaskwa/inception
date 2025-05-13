@@ -6,13 +6,12 @@ function mysql_root_exec {
 
 echo "Initializing database..."
 
-mariadb-install-db --user=mysql --datadir=/var/lib/mysql  #|| { echo "Error: fatal"; exit 1; }
+mariadb-install-db --user=mysql --datadir=/var/lib/mysql
 
 echo "Starting temporary MariaDB server..."
 mysqld_safe --skip-networking &
 pid="$!"
 
-# Wait for server to be ready
 until mysqladmin ping --silent; do
     sleep 1
 done

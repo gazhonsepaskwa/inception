@@ -1,20 +1,14 @@
 #!/bin/bash
 set -ex
 
+sed -i 's|^listen = .*|listen = 9000|' /etc/php/7.4/fpm/pool.d/www.conf
+chown -R www-data:www-data /var/www/html
 
-
-
-### add a big if to install only at first time
-
-
-
-
+if [ ! -f /var/www/html/wp-config.php ]; then
 wget https://wordpress.org/latest.tar.gz -O /tmp/wordpress.tar.gz \
     && mkdir -p /var/www/html \
     && tar -xzf /tmp/wordpress.tar.gz -C /var/www/html --strip-components=1 \
     && rm /tmp/wordpress.tar.gz
-
-chown -R www-data:www-data /var/www/html
 
 cat <<EOF > /var/www/html/wp-config.php
 <?php
@@ -32,15 +26,13 @@ if (!defined('ABSPATH')) {
 require_once ABSPATH . 'wp-settings.php';
 EOF
 
-sed -i 's|^listen = .*|listen = 9000|' /etc/php/7.4/fpm/pool.d/www.conf
-
-mkdir -p /run/php/
-
 echo "installing..."
 
 wp core install --allow-root --path=/var/www/html --url=nalebrun.42.fr --title="1 sept i+" --admin_user="${WP_ADMIN_NAME}" --admin_password="${WP_ADMIN_PASSWORD}" --admin_email="${WP_ADMIN_EMAIL}"
 
 wp user create "${WP_USER_NAME}" "${WP_USER_EMAIL}" --allow-root --path=/var/www/html --role="author" --user_pass="${WP_USER_PASSWORD}"
+
+fi
 
 echo "Starting PHP-FPM..."
 exec php-fpm7.4 -F

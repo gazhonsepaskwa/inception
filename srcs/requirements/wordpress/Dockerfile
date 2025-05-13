@@ -11,6 +11,8 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
+RUN mkdir -p /run/php/
+
 EXPOSE 9000
 
 ENTRYPOINT ["docker-entrypoint.sh"]
