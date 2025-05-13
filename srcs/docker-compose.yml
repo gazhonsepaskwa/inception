@@ -63,6 +63,17 @@ services:
       timeout: 5s
       retries: 5
 
+  adminer:
+    build: ./requirements/adminer/
+    restart: always
+    environment:
+      - ADMINER_DEFAULT_SERVER=mariadb
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    networks:
+      - bridge_net
+
 
 # ======
 
