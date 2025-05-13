@@ -11,6 +11,8 @@ RUN sed -i 's|^listen = .*|listen = 9000|' /etc/php/*/fpm/pool.d/www.conf
 
 RUN chown -R www-data:www-data /var/www/html
 
+RUN mkdir -p /run/php/
+
 EXPOSE 9000
 
 CMD ["php-fpm7.4", "-F"]
