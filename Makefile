@@ -18,4 +18,10 @@ nuke: clean
 
 re: nuke up
 
+push:
+	git add * && git commit -m "aa" && git push && git status
+
+pull:
+	git pull
+
 .PHONY: up down clean
