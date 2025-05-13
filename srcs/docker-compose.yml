@@ -1,6 +1,6 @@
 services:
 
-mariadb:
+  mariadb:
     build:
         context: ./requirements/mariadb/
         args:
@@ -33,6 +33,8 @@ mariadb:
     depends_on:
         mariadb:
           condition: service_healthy
+        redis:
+          condition: service_healthy
     networks:
         - bridge_net
 
@@ -53,16 +55,13 @@ mariadb:
     restart: always
     volumes:
         - redis_data:/data
-    depends_on:
-        - wordpress
     networks:
         - bridge_net
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
-      interval: 30s
+      interval: 10s
       timeout: 5s
-      start-periode: 10s
-      retries: 3
+      retries: 5
 
 
 # ======
