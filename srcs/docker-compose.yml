@@ -49,10 +49,14 @@ services:
         - bridge_net
 
   redis:
-    image: ./requirements/redis/
+    build: ./requirements/redis/
     restart: always
     volumes:
         - redis_data:/data
+    depends_on:
+        - wordpress
+    networks:
+        - bridge_net
 
 
 # ======
