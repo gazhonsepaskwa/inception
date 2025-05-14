@@ -45,8 +45,10 @@ services:
         - "443:443"
     volumes:
         - wp_data:/var/www/html:ro
+        - adminer_data:/var/www/adminer/:ro
     depends_on:
         - wordpress
+        - adminer
     networks:
         - bridge_net
 
@@ -68,6 +70,8 @@ services:
     restart: always
     environment:
       - ADMINER_DEFAULT_SERVER=mariadb
+    volumes:
+      - adminer_data:/var/www/html
     depends_on:
       mariadb:
         condition: service_healthy
@@ -92,6 +96,13 @@ volumes:
         type: none
         o: bind
         device: /home/nalebrun/data/wp/
+
+  adminer_data:
+    driver: local
+    driver_opts:
+        type: none
+        o: bind
+        device: /home/nalebrun/data/adminer/
 
   redis_data:
     driver: local
