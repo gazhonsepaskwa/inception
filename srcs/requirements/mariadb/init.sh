@@ -23,10 +23,8 @@ if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
     exit 1
 fi
 
-# Set root password for localhost
 echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}'; FLUSH PRIVILEGES;" | mysql_root_exec
 
-# Create root user accessible from any host with full privileges
 echo "CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}'; GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;" | mysql_root_exec
 
 if [ -n "$MYSQL_DATABASE" ]; then
