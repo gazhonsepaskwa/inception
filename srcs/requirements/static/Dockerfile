@@ -12,11 +12,11 @@ RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
 
 COPY default.conf /etc/nginx/conf.d/default.conf
 
+RUN mkdir -p /var/www/static/
+COPY ./website /srv/static/
+
 RUN mkdir -p /run/nginx
 
-RUN mkdir -p /var/www/html/
-RUN mkdir -p /var/www/adminer/
-
-EXPOSE 443
+EXPOSE 8000
 
 CMD ["nginx", "-g", "daemon off;"]

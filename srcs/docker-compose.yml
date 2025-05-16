@@ -1,5 +1,35 @@
 services:
 
+  nginx:
+    build: ./requirements/nginx/
+    restart: always
+    ports:
+        - "443:443"
+    volumes:
+        - wp_data:/var/www/html:ro
+        - adminer_data:/var/www/adminer/:ro
+    depends_on:
+        - wordpress
+        - adminer
+    networks:
+        - bridge_net
+
+  ftp:
+    build:
+        context: ./requirements/ftp/
+        args:
+            PSWD: ${FTP_PASSWORD}
+    restart: always
+    volumes:
+      - wp_data:/home/ftpuser/ftp
+    ports:
+      - "21:21"
+      - "21100-21110:21100-21110"
+    depends_on:
+      - wordpress 
+    networks:
+      - bridge_net
+
   mariadb:
     build:
         context: ./requirements/mariadb/
@@ -33,20 +63,45 @@ services:
     depends_on:
         mariadb:
           condition: service_healthy
+        redis:
+          condition: service_healthy
     networks:
         - bridge_net
 
-  nginx:
-    build: ./requirements/nginx/
+  redis:
+    build: ./requirements/redis/
     restart: always
-    ports:
-        - "443:443"
     volumes:
-        - wp_data:/var/www/html:ro
-    depends_on:
-        - wordpress
+        - redis_data:/data
     networks:
         - bridge_net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  adminer:
+    build: ./requirements/adminer/
+    restart: always
+    environment:
+      - ADMINER_DEFAULT_SERVER=mariadb
+    volumes:
+      - adminer_data:/var/www/html
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    networks:
+      - bridge_net
+  
+  static:
+    build: ./requirements/static/
+    restart: always
+    networks:
+      - bridge_net
+
+
+# ======
 
 
 volumes:
@@ -56,12 +111,31 @@ volumes:
         type: none
         o: bind
         device: /home/nalebrun/data/db/
+
   wp_data:
     driver: local
     driver_opts:
         type: none
         o: bind
         device: /home/nalebrun/data/wp/
+
+  adminer_data:
+    driver: local
+    driver_opts:
+        type: none
+        o: bind
+        device: /home/nalebrun/data/adminer/
+
+  redis_data:
+    driver: local
+    driver_opts:
+        type: none
+        o: bind
+        device: /home/nalebrun/data/redis/
+
+
+# ======
+
 
 networks:
   bridge_net:

@@ -15,5 +15,17 @@ nuke: clean
 	@docker system prune -a
 	sudo rm -rf ~/data/db/* 
 	sudo rm -rf ~/data/wp/* 
+	sudo rm -rf ~/data/redis/* 
+	sudo rm -rf ~/data/adminer/* 
+
+nukere: nuke up
+
+re: down up
+
+push:
+	git add * && git commit -m "aa" && git push && git status
+
+pull:
+	git pull
 
 .PHONY: up down clean
