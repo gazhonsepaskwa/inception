@@ -1,81 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Single File HTML CSS Website</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f8f9fa;
-      color: #222;
-    }
-    header {
-      background: #0074d9;
-      color: #fff;
-      padding: 1rem 2rem;
-      text-align: center;
-    }
-    nav {
-      background: #005fa3;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      padding: 0.5rem 0;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.2s;
-    }
-    nav a:hover {
-      color: #ffd700;
-    }
-    main {
-      max-width: 800px;
-      margin: 2rem auto;
-      background: #fff;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    section {
-      margin-bottom: 2rem;
-    }
-    h1, h2 {
-      margin-top: 0;
-    }
-    @media (max-width: 600px) {
-      main {
-        padding: 1rem;
-      }
-      nav {
-        flex-direction: column;
-        gap: 1rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nathan Lebrun (gazh)</title>
+    <!--=================== Google Fonts ====================-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!--=================== Remixicons ====================-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!--=================== SwiperJS CSS ====================-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+
+    <!--=================== Main CSS ====================-->
+    <link rel="stylesheet" href="assets/css/main.css">
+
 </head>
+
 <body>
-  <header>
-    <h1>My Single File Website</h1>
-    <p>Everything you see here is in one HTML file!</p>
-  </header>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-  </nav>
-  <main>
-    <section id="home">
-      <h2>Home</h2>
-      <p>Welcome to this simple, single-file website. All HTML and CSS are embedded in this file, making it easy to share, deploy, or use offline.</p>
-    </section>
-    <section id="about">
-      <h2>About</h2>
-      <p>This website demonstrates how you can build a clean, responsive web page using only HTML and CSS in a single file. No external resources required.</p>
-    </section>
-  </main>
+    <!--=================== Header ====================-->
+    <header id="header" class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.php" class="nav__brand">
+                    <i class="ri-code-s-slash-line"></i>Nathan Lebrun<Span>(gazh)</Span>
+                </a>
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                            <a href="#hero" class="nav__link">Home</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#about" class="nav__link">About</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#qualification" class="nav__link">Qualification</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#service" class="nav__link">Services</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#project" class="nav__link">Projects</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#contact"  class="nav__link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav__toggle">
+                    <i id="nav-toggle" class="ri-menu-3-line"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!--=================== main ====================-->
+    <main class="main">
+        <!--=================== Hero ====================-->
+        <section id="hero" class="hero">
+            <div class="container">
+                <div class="d-grid hero__wrapper">
+                    <div class="hero__content">
+                        <h1 class="hero__title">Lebrun N. Devlopement, Design and more...</h1>
+                        <p class="hero__description">Actual status : Student @ 42 school in Bruxelles</p>
+                        <div class="hero__info">
+                            <div class="hero__info-wrapper"><p class="hero__info-number">10+</p><h2 class="hero__info-title">Phone / Laptop<br>repared</h2></div><div class="hero__info-wrapper"><p class="hero__info-number">18</p><h2 class="hero__info-title">Year<br>old</h2></div><div class="hero__info-wrapper"><p class="hero__info-number">2</p><h2 class="hero__info-title">lvl on <br>42 intra</h2></div>                        </div>
+                    </div>
+                    <img src="assets/img/me.jpg" class="hero__img">
+                </div>
+            </div>
+        </section>
+
+        <!--=================== About Me ====================-->
+        <section id="about" class="section about">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">About Me</h2>
+                    <span class="section__subtitle">Who am I</span>
+                </div>
+                <div class="d-grid about__wrapper">
+                    <div class="about__content">
+                        
+                                                    
+                        <h3 class="about__title">Developer, designer but more...</h3>
+                        <p class="about__description">I&#039;m passionate about coding, whether I’m at 42 or in my free time at home. In addition to programming, I’m also a logo designer and UI/UX designer, exploring creative solutions whenever I have spare time. I speak French and English, which helps me connect with a diverse range of projects and clients. When I&#039;m not working, I love to dive into creative pursuits like music, drawing, or writing. Over the years, I&#039;ve also honed my skills in phone repair, which has given me a practical edge in problem-solving and technical troubleshooting. Additionally, I&#039;ve tackled combinatory logic to complete a fully programmable redstone computer, blending my interest in coding with a hands-on approach to innovative technology.</p>
+                        <a href="#project" class="btn btn--primary">Know More</a>
+                    </div>
+                    <div class="skills">
+                        <h3 class="skills__title">Technologies I've been working with:</h3>
+                        <div class="skills__wrapper">
+                            <div class="skills__content">
+                                <h4 class="skills__subtitle">Code</h4>
+                                <ul class="skills__list">
+                                    <li class="skills__item"><i class="ri-arrow-right-s-fill"></i> Python</li><li class="skills__item"><i class="ri-arrow-right-s-fill"></i> HTML / CSS / JS</li><li class="skills__item"><i class="ri-arrow-right-s-fill"></i> mySQL</li><li class="skills__item"><i class="ri-arrow-right-s-fill"></i> PHP</li><li class="skills__item"><i class="ri-arrow-right-s-fill"></i> Git / Github</li><li class="skills__item"><i class="ri-arrow-right-s-fill"></i> Linux</li><li class="skills__item"><i class="ri-arrow-right-s-fill"></i> C</li>                                </ul>
+                            </div>
+                            <div class="skills__content">
+                                <h4 class="skills__subtitle">UI / UX</h4>
+                                <ul class="skills__list">
+                                <li class="skills__item"><i class="ri-arrow-right-s-fill"></i> Figma</li><li class="skills__item"><i class="ri-arrow-right-s-fill"></i> AI</li><li class="skills__item"><i class="ri-arrow-right-s-fill"></i> Procreate</li><li class="skills__item"><i class="ri-arrow-right-s-fill"></i> Curve</li>                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--=================== Qualification ====================-->
+        <section id="qualification" class="section qualification">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Qualification</h2>
+                    <span class="section__subtitle">Experience & Education</span>
+                </div>
+                <!--============== Professional Experience ============-->
+                <div class="qualification__wrapper">
+                    <h3 class="qualification__name">
+                        <i class="ri-briefcase-fill"></i>
+                        Professional Experience
+                    </h3>
+                    <div class="d-grid qualification__content">
+    	                <div class="qualification__item"><h3 class="qualification__title">Freelance</h3><p class="qualification__description"> I've freelanced every services from this website for people I know </p><span class="qualification__date"> </span></div>                    </div>
+                </div>
+                <!--============== Education ============-->
+                <div class="qualification__wrapper">
+                    <h3 class="qualification__name">
+                        <i class="ri-booklet-fill"></i>
+                        Education
+                    </h3>
+                    <div class="d-grid qualification__content">
+                        <div class="qualification__item"><h3 class="qualification__title">CESS</h3><p class="qualification__description"> I attended A.R.N. in Belgium for the first four years of secondary school, focusing on the math and science track. Then, I transferred to I.P.E.T. for the final two years, where I specialized in IT. </p><span class="qualification__date">2018 - 2024</span></div><div class="qualification__item"><h3 class="qualification__title">Self Learning</h3><p class="qualification__description"> I’ve always been self-driven, learning far more on my own than I did in school. Whenever I had free time and wanted to learn, I turned to the internet to acquire new skills. </p><span class="qualification__date">My whole life</span></div><div class="qualification__item"><h3 class="qualification__title">campus 19</h3><p class="qualification__description"> I'm a student at Campus 19, part of the 42 network, currently working through the Common Core. My goal is to specialize in AI, cybersecurity, and graphic design. </p><span class="qualification__date">2024 - ????</span></div>                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!--=================== services ====================-->
+        <section id="service" class="section service">
+            <script src="assets/js/service.js"></script>
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Services</h2>
+                    <span class="section__subtitle">What I do</span>
+                </div>
+                <div class="d-grid service__wrapper">
+                    <div class="service__card"><div class="service__icon"><i class=" ri-layout-4-fill "></i></div><h3 class="service__title">Logo - UI /<br>UX Design</h3><button class="service__link" onclick="toggleSubDiv(this)" style="margin-bottom: 10px;">Know More</button><div class="service__content" style="display:none" ><h3>I specialize in logo design and UI/UX design, creating visually compelling and user-friendly experiences. Whether you need a distinctive logo that captures your brand’s identity or an intuitive interface that enhances user interaction, I combine creativity and strategy to deliver designs that stand out and meet your specific needs.</h3></div></div><div class="service__card"><div class="service__icon"><i class=" ri-phone-lock-fill "></i></div><h3 class="service__title">All Phone<br>Reparation</h3><button class="service__link" onclick="toggleSubDiv(this)" style="margin-bottom: 10px;">Know More</button><div class="service__content" style="display:none" ><h3>I have extensive experience in phone repair, handling each device with precision to ensure smooth and perfect results. I also repair laptops with the same level of care. Based in Brussels, I accept both local and shipped-in repairs. Please note, I do not usualy repair tablets. Feel free to reach out for reliable and efficient service!</h3></div></div><div class="service__card"><div class="service__icon"><i class=" ri-code-s-slash-line "></i></div><h3 class="service__title">On-Demand<br>Developement</h3><button class="service__link" onclick="toggleSubDiv(this)" style="margin-bottom: 10px;">Know More</button><div class="service__content" style="display:none" ><h3>Within the scope of my expertise and areas I can quickly learn, I’m open to exploring any request you might have. If you have a project or idea you'd like to discuss, don’t hesitate to reach out. We can go over the details, brainstorm solutions, and work together to bring your vision to life. Your input is valuable, and I’m here to help make your ideas a reality.</h3></div></div><div class="service__card"><div class="service__icon"><i class=" ri-computer-fill "></i></div><h3 class="service__title">PC<br>Building </h3><button class="service__link" onclick="toggleSubDiv(this)" style="margin-bottom: 10px;">Know More</button><div class="service__content" style="display:none" ><h3>Unlock the ultimate computing experience with a custom-built PC tailored to your exact needs. Whether for gaming, creative work, or everyday use, I craft powerful, high-quality machines that combine top-tier components with flawless design.Why choose my services? I offer personalized builds, expert craftsmanship, and ongoing support to ensure your PC not only looks incredible but performs beyond expectations.Ready to take your setup to the next level? Let's create your perfect PC today!</h3></div></div>                </div>
+            </div>
+        </section>
+
+        <!--=================== Projects ====================-->
+        <script src="assets/js/github.js"></script>
+        <section id="project" class="section project">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Github projects</h2>
+                    <span class="section__subtitle">My pinned work</span>
+                </div>
+                <div class="d-grid project__wrapper" id="repos"></div>
+            </div>
+        </section>
+
+        <!--=================== Testimonials ====================-->
+        <section id="testimonial" class="section testimonial">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Testimonials</h2>
+                    <span class="section__subtitle">What my clients say</span>
+                </div>
+                <div class="testimonial__wrapper swiper">
+                    <div class="swiper-wrapper">
+                                            </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <!--=================== Contact ====================-->
+        <section id="contact" class="section contact">
+            <div class="container">
+                <div class="d-grid contact__wrapper">
+                    <div class="contact__content">
+                        <h2 class="contact__title">Interested in working together? Let's talk</h2>
+                        <p class="contact__description">
+                            Ready to work together on your next project? I'd love to hear from you! 
+                            Feel free to get in touch using the contact information below.
+                            Whether you have a specific project in mind or just want to chat about your needs , I am here to help.
+                            I will respond to your message as quickly as possible and look forward to connecting with you soon.
+                        </p>
+                    </div>
+                    <div class="contact__btn">
+                        <a href="#contact" class="btn btn--secondary">Get in touch</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!--=================== footer ====================-->
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="d-grid footer__wrapper">
+                <div class="footer__content">
+                    <h4 class="footer__title">Follow Me</h4>
+                    <ul class="footer__social-list">
+                        <li class="footer__social-item">
+                            <a href="https://api.whatsapp.com/send?phone=32493915530&text=Hello%2C%20how%20may%20I%20be%20of%20assistance%3F" target="_blank" class="footer__social-link">
+                                <i class="ri-whatsapp-fill"></i>
+                            </a>
+                        </li>
+                        <li class="footer__social-item">
+                            <a href="https://github.com/gazhonsepaskwa" target="_blank" class="footer__social-link">
+                                <i class="ri-github-fill"></i>
+                            </a>
+                        </li>
+                        <li class="footer__social-item">
+                            <a href="https://www.instagram.com/gaz.honsepaskwa" target="_blank" class="footer__social-link">
+                                <i class="ri-instagram-fill"></i>
+                            </a>
+                        </li>          
+                    </ul>
+                </div>
+                <div class="footer__content">
+                    <h4 class="footer__title">Email Me</h4>
+                    <a href="mailto:gaz.honsepaskwa@gmail.com" class="footer__contact">gaz.honsepaskwa@gmail.com</a>
+                </div>
+                <div class="footer__content">
+                    <h4 class="footer__title">Call Me</h4>
+                    <a href="tel:+32493915530" class="footer__contact">+(32)493 91 55 30</a>
+                </div>
+            </div>
+            <p class="footer__copyright">&copy; 2024 Nathan LEBRUN</p>
+        </div>
+    </footer>
+
+    <!--=================== SwiperJS  ====================-->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+    <!--=================== ScrollReveal ==================-->
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <!--=================== Main JS ====================-->
+    <script src="assets/js/main.js"></script>
 </body>
+
 </html>
