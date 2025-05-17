@@ -13,6 +13,7 @@ clean: down
 
 nuke: clean
 	@docker system prune -a
+	@docker system prune
 	sudo rm -rf ~/data/db/* 
 	sudo rm -rf ~/data/wp/* 
 	sudo rm -rf ~/data/redis/* 
